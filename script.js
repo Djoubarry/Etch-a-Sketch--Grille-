@@ -15,19 +15,40 @@ body.appendChild(container);
 
 let size = 16;
 
-function createGrid () {
+function createGrid(size) {
     container.innerHTML = "";
 
     const squareSize = 960 / size;
 
-    for (i = 0; i < size * size; i++) {
+    for (let i = 0; i < size * size; i++) {
         const square = document.createElement('div')
         square.classList.add("square")
 
-        square.style
+        //La taille du carré
+        square.style.width = `${squareSize}px`
+        square.style.height = `${squareSize}px`
+
+        square.addEventListener("mouseover", () => {
+            square.style.backgroundColor = "black"
+        });
+
+        container.appendChild(square)
     }
 }
 
+function resetGrid() {
+    let newSize = parseInt(prompt("New size with (max 100): "));
+
+    if (isNaN(newSize) || newSize < 1 || newSize > 100) {
+        alert("Please enter a number between 1 and 100");
+        return;
+    }
+
+    size = newSize;
+    createGrid(size);
+
+}
+btnNewGrille.addEventListener("click", resetGrid)
 
 createGrid(size)
 
